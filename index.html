@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KanBan Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1 class="app-title">📋 KanBan Board</h1>
+            <div class="board-menu">
+                <select class="board-selector" id="boardSelector">
+                   
+                </select>
+            </div>
+        </header>
+        
+        <div class="board-header">
+            <h2 class="board-title">Main Board</h2>
+            <div class="buttons-container">
+                <button class="add-task-btn" id="addTaskBtn">+ Add New Task</button>
+                <button class="add-board-btn" id="addBoardBtn">+ Create New Board</button>
+            </div>
+        </div>
+        
+        <div class="board">
+            <div class="board__column">
+                <div class="board__column__header todo-header">
+                    <span>To Do</span>
+                    <span class="column-count">3</span>
+                </div>
+                <div class="board__column__content" id="todoColumn">
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Design homepage mockup</h3>
+                        <p class="task-desc">Create wireframes and visual design for the new homepage.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Due: Mar 10</span>
+                            <span class="task-priority priority-high">High</span>
+                        </div>
+                    </div>
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Research competitors</h3>
+                        <p class="task-desc">Analyze top 5 competitor websites and features.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Due: Mar 15</span>
+                            <span class="task-priority priority-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Write user stories</h3>
+                        <p class="task-desc">Define user stories for the next sprint.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Due: Mar 8</span>
+                            <span class="task-priority priority-low">Low</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="board__column">
+                <div class="board__column__header progress-header">
+                    <span>In Progress</span>
+                    <span class="column-count">2</span>
+                </div>
+                <div class="board__column__content" id="progressColumn">
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Implement login functionality</h3>
+                        <p class="task-desc">Create authentication API and frontend components.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Due: Mar 5</span>
+                            <span class="task-priority priority-high">High</span>
+                        </div>
+                    </div>
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Create database schema</h3>
+                        <p class="task-desc">Design and implement the initial database structure.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Due: Mar 7</span>
+                            <span class="task-priority priority-medium">Medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="board__column">
+                <div class="board__column__header done-header">
+                    <span>Done</span>
+                    <span class="column-count">1</span>
+                </div>
+                <div class="board__column__content" id="doneColumn">
+                    <div class="board__column__content__item" draggable="true">
+                        <div class="task-actions">
+                            <button class="edit-task-btn">✏️</button>
+                            <button class="delete-task-btn">🗑️</button>
+                        </div>
+                        <h3 class="task-title">Project kickoff meeting</h3>
+                        <p class="task-desc">Initial meeting with stakeholders to define project scope.</p>
+                        <div class="task-meta">
+                            <span class="task-due">Completed: Mar 1</span>
+                            <span class="task-priority priority-medium">Medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Task form modal -->
+    <div class="task-form" id="taskFormModal">
+        <div class="task-form__content">
+            <div class="task-form__header">
+                <h2 class="task-form__title">Add New Task</h2>
+                <button class="close-btn" id="closeFormBtn">&times;</button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" placeholder="Enter task title" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" placeholder="Enter task description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate">
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="todo">To Do</option>
+                        <option value="progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="save-btn">Save Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
